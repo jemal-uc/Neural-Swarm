@@ -109,8 +109,6 @@ Performance depends on GPU capability, device pixel ratio, and screen resolution
 
 ## License
 
-Add your preferred license here, for example:
-
 ```text
-MIT License
+Gilberto Jemal
 ```
