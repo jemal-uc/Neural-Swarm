@@ -1,3 +1,99 @@
+# Neural Swarm
+
+Interactive 3D boid simulation built with Three.js. The project visualizes a school of 1,024 autonomous agents that move using classic flocking behavior, react to mouse input, and can shift between multiple formation modes.
+
+## Overview
+
+Neural Swarm simulates collective movement using three core boid rules:
+
+- **Separation**: agents avoid crowding nearby agents.
+- **Alignment**: agents try to match the direction of nearby agents.
+- **Cohesion**: agents move toward the average position of nearby agents.
+
+The result is an organic swarm that can behave like a free-moving school, a structured sphere, a double helix, or a chaotic field.
+
+## Features
+
+- **1,024 active boids** rendered with Three.js `InstancedMesh`.
+- **Real-time flocking controls** for separation, alignment, cohesion, and speed.
+- **Multiple formation modes**:
+  - Free School
+  - Sphere Grid
+  - Double Helix
+  - Chaos Field
+- **Mouse interaction**:
+  - left mouse button attracts the swarm
+  - right mouse button repels the swarm
+  - scroll zooms the camera
+- **Color modes**:
+  - Neon Rainbow
+  - Deep Ocean
+  - Thermal Vision
+  - Matrix Green
+- **Post-processing bloom** for a neon visual style.
+- **Orbit camera controls** for rotating, zooming, and inspecting the simulation.
+- **FPS counter and status panel** for runtime feedback.
+- **Responsive full-screen canvas**.
+
+## Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- Tailwind CSS via CDN
+- Three.js r128 via CDN
+- Three.js `EffectComposer`
+- Three.js `UnrealBloomPass`
+- Three.js `OrbitControls`
+
+## How It Works
+
+Each boid stores:
+
+- position
+- velocity
+- acceleration
+- color offset
+
+On every animation frame, each boid calculates steering forces from nearby boids:
+
+```js
+sep.multiplyScalar(CONFIG.separation);
+ali.multiplyScalar(CONFIG.alignment);
+coh.multiplyScalar(CONFIG.cohesion);
+```
+
+Those forces are added to acceleration, then applied to velocity and position. Velocity is clamped by `CONFIG.maxSpeed`, while steering force is limited by `CONFIG.maxForce`.
+
+The simulation wraps boids around a cubic boundary, so agents leaving one side of the world reappear on the opposite side.
+
+## Formation Modes
+
+### Free School
+
+The swarm behaves like a natural flock using only separation, alignment, and cohesion.
+
+### Sphere Grid
+
+Each boid receives a target point on a spherical distribution, creating a structured globe-like swarm.
+
+### Double Helix
+
+Boids are assigned alternating points along two rotating spiral strands.
+
+### Chaos Field
+
+Each boid follows animated sine and cosine targets, creating a turbulent moving formation.
+
+## Controls
+
+### Interface Controls
+
+| Control | Description |
+| --- | --- |
+| Separation | Controls how strongly boids avoid each other. |
+| Alignment | Controls how strongly boids match nearby movement direction. |
+| Cohesion | Controls how strongly boids group together. |
 | Speed Limit | Sets the maximum boid velocity. |
 | Formation Logic | Switches between school, sphere, helix, and chaos modes. |
 | Color Mode | Changes the color palette used by the boids. |
