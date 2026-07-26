@@ -106,9 +106,3 @@ Performance depends on GPU capability, device pixel ratio, and screen resolution
 - `InstancedMesh` is used to render many boids efficiently.
 - The current neighbor search loops through all boids for each boid, which is simple but can become expensive as the boid count increases. A spatial partitioning structure such as a grid or octree would improve performance for larger simulations.
 - The renderer currently uses `window.devicePixelRatio` directly. Limiting it with `Math.min(window.devicePixelRatio, 2)` can improve performance on high-DPI displays.
-
-## License
-
-```text
-Gilberto Jemal
-```
